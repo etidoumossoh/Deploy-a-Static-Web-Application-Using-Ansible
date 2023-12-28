@@ -1,0 +1,50 @@
+---
+- name: Deploy Static Website on EC2 Instance
+  hosts: all
+  remote_user: ubuntu
+  become: yes
+
+  vars:
+    document_root: /var/www/html
+    app_root: html_demo_site
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: latest
+
+    - name: Copy website files to the server's root directory
+      copy:
+        src: /home/ubuntu/{{ app_root }}
+        dest: "{{ document_root }}"
+        mode: preserve
+
+    - name: Apply Nginx template
+      template:
+        src: /home/ubuntu/{{ app_root }}/nginx-lab/nginx.conf
+        dest: /etc/nginx/sites-available/default
+      notify: Restart Nginx
+
+    - name: Enable new site
+      file:
+        src: /etc/nginx/sites-available/default
+        dest: /etc/nginx/sites-enabled/default
+        state: link
+      notify: Restart Nginx
+
+    - name: Allow Access to port 80
+      ufw:
+        rule: allow
+        port: "80"
+        protocol: tcp
+
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
