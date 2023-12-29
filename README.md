@@ -23,7 +23,7 @@ Set up your playbook on the Ansible control node. Your playbook should contain t
 - Open Port 80 using the UFW module
 - Set up handlers for the Nginx Services 
 
-# Execute your PlayBook
+# STEP FIVE: Execute your PlayBook
 Run your playbook - eg ansible-playbook *playbook-name.yaml*
 
 
