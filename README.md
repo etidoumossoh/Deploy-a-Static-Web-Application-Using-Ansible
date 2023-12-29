@@ -1,5 +1,5 @@
 # Deploy-a-Static-Web-Application-Using-Ansible
-Deploy a Static Web Application to a remote Server Using Ansible using these steps:
+Deploy a Static Web Application to a remote Server Using Ansible by following the steps below:
 
 ![image](https://github.com/etidoumossoh/Deploy-a-Static-Web-Application-Using-Ansible/assets/113789743/8f153b9d-ed5d-4114-8116-99e1edef85e4)
 
